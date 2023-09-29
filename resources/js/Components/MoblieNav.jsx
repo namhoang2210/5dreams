@@ -1,9 +1,12 @@
 import { Avatar, Flex, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, VStack, useColorModeValue, Box, MenuDivider } from '@chakra-ui/react';
+import { useForm } from '@inertiajs/react';
 import React from 'react'
 import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi';
 
 
 const MobileNav = ({ onOpen, ...rest }) => {
+    const { post, processing } = useForm({});
+
     return (
       <Flex
         ml={{ base: 0, md: 60 }}
@@ -65,7 +68,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 <MenuItem>Settings</MenuItem>
                 <MenuItem>Billing</MenuItem>
                 <MenuDivider />
-                <MenuItem>Sign out</MenuItem>
+                <MenuItem onClick={() =>post(route('logout'))}>Sign out</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
