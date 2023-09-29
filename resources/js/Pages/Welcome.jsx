@@ -1,8 +1,7 @@
-import { Link, Head } from '@inertiajs/react';
+import { Link, Head } from "@inertiajs/react";
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth }) {
     const baseUrl = window.location.origin;
-
     return (
         <>
             <Head title="Welcome" />
@@ -10,7 +9,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {auth.user ? (
                         <Link
-                            href={route('dashboard')}
+                            href={route("dashboard")}
                             className="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                         >
                             Dashboard
@@ -18,14 +17,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     ) : (
                         <>
                             <Link
-                                href={route('login')}
+                                href={route("login")}
                                 className="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Log in
                             </Link>
 
                             <Link
-                                href={route('register')}
+                                href={route("register")}
                                 className="ml-4 font-semibold text-gray-600 hover:text-gray-900  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Register
@@ -34,9 +33,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     )}
                 </div>
                 <img src={`${baseUrl}/storage/logo/5dreams.png`} alt="" />
-
             </div>
-
         </>
     );
 }
