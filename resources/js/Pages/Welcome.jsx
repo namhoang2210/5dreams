@@ -32,7 +32,7 @@ export default function Welcome({ auth }) {
                         </>
                     )}
                 </div>
-                <img src={`${baseUrl}/storage/logo/5dreams.png`} alt="" />
+                <img src={`${baseUrl}/images/logo.png`} alt="" />
             </div>
         </>
     );
