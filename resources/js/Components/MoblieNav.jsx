@@ -10,8 +10,9 @@ import {
     Text,
     VStack,
     Box,
+    MenuDivider,
 } from "@chakra-ui/react";
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import React from "react";
 import { FiChevronDown, FiMenu } from "react-icons/fi";
 import { PiFlowerTulipDuotone } from "react-icons/pi";
@@ -98,10 +99,12 @@ const MobileNav = ({ onOpen, user, header, ...rest }) => {
                             </HStack>
                         </MenuButton>
                         <MenuList bg="white">
-                            {/* <MenuItem>Profile</MenuItem>
-                            <MenuItem>Settings</MenuItem>
-                            <MenuItem>Billing</MenuItem>
-                            <MenuDivider /> */}
+                            <Link href="/profile">
+                                <MenuItem>Profile</MenuItem>
+                            </Link>
+                            {/* <MenuItem>Settings</MenuItem>
+                            <MenuItem>Billing</MenuItem> */}
+                            <MenuDivider />
                             <MenuItem onClick={() => post(route("logout"))}>
                                 Sign out
                             </MenuItem>
