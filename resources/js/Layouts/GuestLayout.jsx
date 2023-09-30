@@ -1,16 +1,16 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import { Link } from "@inertiajs/react";
 
 export default function Guest({ children }) {
-    return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+    const baseUrl = window.location.origin;
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    return (
+        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white md:bg-gray-100">
+            <div className="w-full sm:max-w-md md:bg-white mt-6 px-6 py-4  overflow-hidden sm:rounded-lg">
+                <div className="pt-5 pb-7 font-semibold text-red-400 text-center text-lg">
+                    Wellcome to 5Dreams
+                </div>
+
                 {children}
             </div>
         </div>

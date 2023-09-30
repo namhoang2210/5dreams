@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Avatar } from "@chakra-ui/react";
+import moment from "moment";
 
 export default function Chart({ transactions }) {
     const [data1, setData1] = useState();
@@ -90,7 +91,7 @@ export default function Chart({ transactions }) {
                 <Bar options={options} data={data} />
             </div>
             <div className="bg-white h-[450px] rounded-xl shadow-sm py-4 px-6 col-span-3 xl:col-span-1 text-sm">
-                <h1 className=" font-semibold">Thông báo</h1>
+                <h1 className=" font-semibold">Giao dịch gần đây</h1>
                 {transactions.length &&
                     transactions.map((item) => (
                         <div
@@ -122,7 +123,9 @@ export default function Chart({ transactions }) {
                                             d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                                         />
                                     </svg>
-                                    22/22/2022
+                                    {moment(item.created_at).format(
+                                        "HH:mm:ss DD/MM/YYYY"
+                                    )}
                                 </div>
                             </div>
                         </div>
