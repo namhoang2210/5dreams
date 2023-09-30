@@ -1,3 +1,4 @@
+import Chart from "@/Components/dashboard/Chart";
 import AdminLayout from "@/Layouts/AdminLayout";
 import {
     Stat,
@@ -9,39 +10,49 @@ import {
 } from "@chakra-ui/react";
 import { Head } from "@inertiajs/react";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, data }) {
+    console.log(data.transactions);
     return (
         <AdminLayout user={auth.user} header="Bussiness Dashboard">
             <Head title="Dashboard" />
 
             <StatGroup gap={{ base: 4, md: 10 }}>
                 <Stat background="white" p={5} rounded="lg" minWidth="300px">
-                    <StatLabel>Tiền vào</StatLabel>
-                    <StatNumber>2,345,670 VND</StatNumber>
+                    <StatLabel>Ngân sách còn lại</StatLabel>
+                    <StatNumber>
+                        {(data.money_in - data.money_out).toLocaleString(
+                            "en-US"
+                        )}{" "}
+                        VND
+                    </StatNumber>
                     <StatHelpText>
                         <StatArrow type="increase" />
-                        23.36% so với tháng trước
+                        xx% so với tháng trước
+                    </StatHelpText>
+                </Stat>
+                <Stat background="white" p={5} rounded="lg" minWidth="250px">
+                    <StatLabel>Tiền vào</StatLabel>
+                    <StatNumber>
+                        {data.money_in.toLocaleString("en-US")} VND
+                    </StatNumber>
+                    <StatHelpText>
+                        <StatArrow type="increase" />
+                        xx% so với tháng trước
                     </StatHelpText>
                 </Stat>
 
                 <Stat background="white" p={5} rounded="lg" minWidth="300px">
                     <StatLabel>Tiền ra</StatLabel>
-                    <StatNumber>450,000 VND</StatNumber>
+                    <StatNumber>
+                        {data.money_out.toLocaleString("en-US")} VND
+                    </StatNumber>
                     <StatHelpText>
                         <StatArrow type="decrease" />
-                        9.05% so với tháng trước
-                    </StatHelpText>
-                </Stat>
-
-                <Stat background="white" p={5} rounded="lg" minWidth="300px">
-                    <StatLabel>Sản phẩm</StatLabel>
-                    <StatNumber>45</StatNumber>
-                    <StatHelpText>
-                        <StatArrow type="decrease" />
-                        9.05% so với tháng trước
+                        xx% so với tháng trước
                     </StatHelpText>
                 </Stat>
             </StatGroup>
+            <Chart transactions={data.transactions} />
         </AdminLayout>
     );
 }

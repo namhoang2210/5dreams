@@ -24,6 +24,7 @@ class AddMoneyInRequest extends FormRequest
         return [
             'total' => ['required', 'numeric', 'min:0'],
             'note' => ['nullable', 'string'],
+            'member_id' => ['required', 'numeric'],
         ];
     }
 }

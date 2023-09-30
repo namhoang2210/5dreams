@@ -59,7 +59,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
             name: "Tiền ra",
             icon: FiCompass,
             path: "/dashboard/money-out",
-            url: "dashboard",
+            url: "dashboard.money-out",
         },
     ];
 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MoneyInController;
+use App\Http\Controllers\MoneyOutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,12 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::group(['prefix' => 'dashboard'], function () {
-        Route::get('/', function () {
-            return Inertia::render('Dashboard');
-        })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/money-in', [MoneyInController::class, 'index'])->name('dashboard.money-in');
         Route::post('/money-in', [MoneyInController::class, 'store'])->name('dashboard.money-in.add');
+
+        Route::get('/money-out', [MoneyOutController::class, 'index'])->name('dashboard.money-out');
+        Route::post('/money-out', [MoneyOutController::class, 'store'])->name('dashboard.money-out.add');
     });
 });
 

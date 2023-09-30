@@ -32,7 +32,7 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { router } from "@inertiajs/react";
 
-export default function MoneyIn({ auth, transactions, members }) {
+export default function MoneyOut({ auth, transactions, members }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [errors, setErrors] = useState({});
     const toast = useToast();
@@ -70,7 +70,7 @@ export default function MoneyIn({ auth, transactions, members }) {
         }
 
         setErrors({});
-        post(route("dashboard.money-in.add"));
+        post(route("dashboard.money-out.add"));
         onClose();
         reset();
 
@@ -83,7 +83,7 @@ export default function MoneyIn({ auth, transactions, members }) {
     };
 
     const handlePageChange = (newPage) => {
-        router.visit(`money-in?page=${newPage}`, {
+        router.visit(`money-out?page=${newPage}`, {
             method: "get",
         });
     };
@@ -91,7 +91,7 @@ export default function MoneyIn({ auth, transactions, members }) {
     return (
         <>
             <Head title="Money in" />
-            <AdminLayout user={auth.user} header="Danh sách thu vào">
+            <AdminLayout user={auth.user} header="Danh sách chi ra">
                 <Box
                     bg="white"
                     minHeight="calc(100vh - 160px)"
@@ -167,7 +167,7 @@ export default function MoneyIn({ auth, transactions, members }) {
                 <Modal isOpen={isOpen} size="lg" onClose={onClose} isCentered>
                     <ModalOverlay />
                     <ModalContent>
-                        <ModalHeader>Thêm khoản nộp tiền</ModalHeader>
+                        <ModalHeader>Thêm khoản tiền chi </ModalHeader>
                         <ModalCloseButton />
                         <ModalBody pb={6}>
                             <FormControl isInvalid={!!errors.total}>
@@ -187,9 +187,9 @@ export default function MoneyIn({ auth, transactions, members }) {
                             </FormControl>
 
                             <FormControl mt={4} isInvalid={!!errors.member_id}>
-                                <FormLabel>Người nộp</FormLabel>
+                                <FormLabel>Người quyết toán</FormLabel>
                                 <Select
-                                    placeholder="Chọn người nộp"
+                                    placeholder="Chọn người quyết toán"
                                     onChange={(e) =>
                                         setData("member_id", e.target.value)
                                     }
