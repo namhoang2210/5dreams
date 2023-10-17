@@ -1,0 +1,103 @@
+version: '3'
+
+services:
+
+    ####################################################################################################
+    # PHP
+    ####################################################################################################
+    php:
+        container_name: laravel_php
+        build: .docker/php
+        ports:
+            - 5122:5173
+        volumes:
+            - .:/var/www:cached
+        depends_on:
+            - mysql
+        networks:
+            - db_network
+            # - redis_network
+            # - smtp_network
+
+
+    ####################################################################################################
+    # Nginx
+    ####################################################################################################
+    nginx:
+        container_name: laravel_nginx
+        image: nginx
+        ports:
+            - 2000:80
+        volumes:
+            - .:/var/www
+            - .docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - .docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - php
+            - mysql
+        networks:
+            - db_network
+            # - redis_network
+            # - smtp_network
+
+    ####################################################################################################
+    # Redis
+    ####################################################################################################
+    # redis:
+    #     image: redis:6.0-alpine
+    #     container_name: redis
+    #     ports:
+    #     - 6002:6379
+    #     volumes:
+    #     - ./docker/data/redis:/data
+    #     restart: unless-stopped
+
+    ####################################################################################################
+    # DATABASE (MySQL)
+    ####################################################################################################
+    mysql:
+        container_name: laravel_mysql
+        image: mysql:8.0
+        ports:
+            - 2206:3306
+        volumes:
+            - .docker/db/data:/var/lib/mysql
+            - .docker/logs:/var/log/mysql
+            - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+            - .docker/db/sql:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+        restart: unless-stopped
+        networks:
+            - db_network
+
+    ####################################################################################################
+    # PHP myadmin
+    #######################################################################
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: phpmyadmin
+        ports:
+            - 2080:80
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            UPLOAD_LIMIT: 102400K
+        depends_on:
+            - mysql
+        restart: unless-stopped
+        networks:
+            - db_network
+
+networks:
+  db_network:
+    driver: bridge
+#   redis_network:
+#     driver: bridge
+#   smtp_network:
+#     driver: bridge
+
+
