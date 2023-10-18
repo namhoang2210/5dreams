@@ -123,20 +123,20 @@ export default function MoneyOut({ auth, transactions, members }) {
                     </Flex>
 
                     <TableContainer mt={{ base: 6, md: 10 }}>
-                        <Table size="sm">
+                        <Table variant='striped' colorScheme='gray' size="sm">
                             <Thead>
-                                <Tr>
-                                    <Th>No</Th>
-                                    <Th>Số tiền</Th>
-                                    <Th>Người đóng</Th>
-                                    <Th>Ghi chú</Th>
-                                    <Th>Thời gian</Th>
+                                <Tr >
+                                    <Th textColor="#4C4382">No.</Th>
+                                    <Th textColor="#4C4382">Số tiền</Th>
+                                    <Th textColor="#4C4382">Người đóng</Th>
+                                    <Th textColor="#4C4382">Ghi chú</Th>
+                                    <Th textColor="#4C4382">Thời gian</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {transactions.data.map((item, index) => (
                                     <Tr key={item.id}>
-                                        <Td>{index + 1}</Td>
+                                        <Td>{(transactions.current_page - 1) * 15 + index + 1}</Td>
                                         <Td>
                                             {Number(item.total).toLocaleString(
                                                 "en-US"
